@@ -5,10 +5,18 @@ load_dotenv()
 
 
 class Config:
+    load_dotenv()
+
     # Example: postgresql+psycopg2://user:password@localhost:5432/asistencia_db
+    _DB_HOST = os.environ.get("DB_HOST", "")
+    _DB_PORT = os.environ.get("DB_PORT", "5432")
+    _DB_NAME = os.environ.get("DB_NAME", "")
+    _DB_USER = os.environ.get("DB_USER", "")
+    _DB_PASSWORD = os.environ.get("DB_PASSWORD", "")
+
     SQLALCHEMY_DATABASE_URI = os.environ.get(
         "DATABASE_URL",
-        "postgresql+psycopg2://postgres:postgres@localhost:5432/asistencia_db",
+        f"postgresql://{_DB_USER}:{_DB_PASSWORD}@{_DB_HOST}:{_DB_PORT}/{_DB_NAME}",
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     JSON_SORT_KEYS = False
